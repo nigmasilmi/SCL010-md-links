@@ -1,0 +1,60 @@
+httpDetective: (incomingData) => {
+        //this linkRegex is a placeholder
+        // let linkRegex = new RegExp('http');
+        let regex = new RegExp("^([0-9A-Za-z-\\.@:%_\\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+        // let linkRegex = 'https://es.wikipedia.org/wiki/Markdown';
+        let linkRegex = regex;
+        // console.log('Have we found something?: ', incomingData.includes(linkRegex));
+    //     if (incomingData.includes(linkRegex)) {
+    //         let foundAt = incomingData.search(linkRegex);
+    //         console.log('was found at', foundAt);
+    //         //empezamos a buscar desde foundAt y nos detenemos al encontrar un espacio
+    //         for (let b = foundAt; b < incomingData.length; b++) {
+    //             if (incomingData[b] === ' ' || incomingData[b] === ')') {
+    //                 console.log('index where the first space was found', b);
+    //                 let endOfLink = b;
+    //                 let linkFound = incomingData.slice(foundAt, endOfLink );
+    //                 console.log('linkFound: ', linkFound);
+                    
+    //                 break;
+    //             }else{
+    //                 console.log('no encuentra un espacio');
+    //             }
+
+    //         }
+    //         console.log('incomingData.search(linkRegex)', incomingData.search(linkRegex));
+    //     } else if (incomingData.search(linkRegex)) {
+    //         console.log('This is found');
+    //         console.log(incomingData.search(linkRegex));
+    //     } else {
+    //         console.log('didn\'t found, dude');
+    //     }
+       
+    // },
+
+    if (incomingData.search(linkRegex)) {
+        let foundAt = incomingData.search(linkRegex);
+        console.log('was found at', foundAt);
+        //empezamos a buscar desde foundAt y nos detenemos al encontrar un espacio
+        for (let b = foundAt; b < incomingData.length; b++) {
+            if (incomingData[b] === ' ' || incomingData[b] === ')') {
+                console.log('index where the first space was found', b);
+                let endOfLink = b;
+                let linkFound = incomingData.slice(foundAt, endOfLink );
+                console.log('linkFound: ', linkFound);
+                
+                break;
+            }else{
+                console.log('no encuentra un espacio');
+            }
+
+        }
+        console.log('incomingData.search(linkRegex)', incomingData.search(linkRegex));
+    } else if (incomingData.search(linkRegex)) {
+        console.log('This is found');
+        console.log(incomingData.search(linkRegex));
+    } else {
+        console.log('didn\'t found, dude');
+    }
+   
+},

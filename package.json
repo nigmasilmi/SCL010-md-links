@@ -1,0 +1,43 @@
+{
+  "name": "nigm4_md-links",
+  "version": "1.0.0",
+  "devDependencies": {
+    "axios": "^0.19.0",
+    "jest": "^24.9.0"
+  },
+  "description": "- [ ] Puede instalarse via `npm install --global <github-user>/md-links`",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "eslint": "^6.2.2",
+    "get-urls": "^9.1.0"
+  },
+  "scripts": {
+    "test": "jest --coverage",
+    "eslint": "eslint .",
+    "pretest": "npm run eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nigmasilmi/SCL010-md-links.git"
+  },
+  "keywords": [
+    "md-links",
+    "md-files",
+    "links",
+    "check",
+    "broken",
+    "stats",
+    "npm",
+    "package",
+    "laboratoria"
+  ],
+  "author": "nigm4 / Laboratoria",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nigmasilmi/SCL010-md-links/issues"
+  },
+  "homepage": "https://github.com/nigmasilmi/SCL010-md-links#readme"
+}
