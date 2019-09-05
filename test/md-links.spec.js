@@ -1,12 +1,17 @@
-const mdLinksTest = require('./../index');
+const mdLinksTest = require('./../index.js');
+// const mdHelpers = require('./../mdFunk.js');
 
-test('mdLinksTest (mdLinks) must be a function', ()=>{
+test('mdLinksTest (mdLinks) should exist', ()=>{
     expect(mdLinksTest).toBeDefined();
 });
 
-test('mdLinks must see the arguments passed', ()=>{
-    const comingPath = './';
-    const comingOptions = '{validate:true}';
-    const mdLinksWithArgs = mdLinksTest(comingPath, comingOptions);
-    expect(mdLinksWithArgs.toBeDefined());
-});
+//no pasa 
+// test('mdLinksTest (mdLinks) must be a promise', ()=>{
+//         expect.assertions(1);
+//         return mdLinksTest().then(result => {
+//           expect(result).toBe(true);
+//         });
+      
+// });
+
+

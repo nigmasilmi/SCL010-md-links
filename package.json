@@ -12,7 +12,10 @@
   },
   "dependencies": {
     "eslint": "^6.2.2",
-    "get-urls": "^9.1.0"
+    "get-urls": "^9.1.0",
+    "isdir": "^2.0.1",
+    "request": "^2.88.0",
+    "yargs": "^14.0.0"
   },
   "scripts": {
     "test": "jest --coverage",

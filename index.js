@@ -3,13 +3,25 @@
 //   console.log('funciona');
 // };
 
-const mdLinkHelpersIn = require('./mdFunk');
+const argv = require('yargs');
 
-const mdLinks = (path, options) => {
-    //llamar al helper que recibe el path y hace algo con ello
-    mdLinkHelpersIn.pathRetriever();
+const inputComm = require('./commands');
+
+
+
+//aquí tengo que definir los argumentos que vienen
+
+//luego aquí debo decirle que pase los flags como argumentos de la función
+const mdLinks = (path, validate)=>{
+
+    if (argv.validate === true ) {
+        console.log('está validando');
+      } else {
+        console.log('Retreat from the xupptumblers!');
+      }
+ inputComm.path = path;
+ inputComm.validate = validate;
 
 };
-
 
 module.exports = mdLinks;
