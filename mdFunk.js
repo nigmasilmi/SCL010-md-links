@@ -3,6 +3,7 @@ const pathCore = require('path');
 const fs = require('fs');
 const getURLs = require('get-urls');
 // const stats = require('fs.Stats');
+const checkLinks = require('check-links');
 
 const mdLinkHelpers = {
 
@@ -16,11 +17,14 @@ const mdLinkHelpers = {
 
     finalResult:[],
 
+    statusResulTemp:'',
+
     isFolderOrFile:(pathOption)=>{
-        if( fs.stats.isDirectory(pathOption)){
+        if(fs.statSync(pathOption).isDirectory()){
             console.log('debemos ahora buscar en el directorio');
-        }else if ( fs.stats.isFile(pathOption)){
-            console.log('aquí ejecutamos la función de buscar links');
+            mdLinkHelpers.findThePath(pathOption);
+        }else if (fs.statSync(pathOption).isFile()){
+            mdLinkHelpers.readDirectoryContent(pathOption);
         }else{
             console.log('generar un mensaje al usuario');
         }
@@ -49,11 +53,11 @@ const mdLinkHelpers = {
     },
     //output to the user if there are no md files
     checkTheArray: () => {
-        if(mdLinkHelpers.interestFiles.length === 1){
+        if( !Array.isArray(mdLinkHelpers.interestFiles) || !mdLinkHelpers.interestFiles.length){
+           console.log('es falsy este array');
             if (mdLinkHelpers.interestFiles[0] === undefined) {
+                console.log('este es el length del array', mdLinkHelpers.interestFiles.length);
                 console.log('There are no MarkDown files in the requested directory');
-            }else{
-                console.log('This is the only element in the array: ', mdLinkHelpers.interestFiles[0]);
             }
 
         }
@@ -109,14 +113,38 @@ const mdLinkHelpers = {
         console.log('This is cleanedLinkArr: ',cleanedLinkArr);
         mdLinkHelpers.foundAndCleanedArr = cleanedLinkArr;
         mdLinkHelpers.generateObjs();
+        // mdLinkHelpers.checkStatus();
+
         //mdLinkHelpers.findAsocText();
+     },
+
+    
+
+     findAsocText:()=>{
+        console.log('todavía falta el cuerpo de esta función');
+         
+     },
+
+     checkStatus: (theLink)=>{
+         new Promise(resolve => {
+            setTimeout(() => {
+              resolve();
+            }, 100);
+          });
+         async function f1() {
+            mdLinkHelpers.statusResulTemp = await checkLinks(theLink);
+         console.log('mdLinkHelpers.statusResulTemp',mdLinkHelpers.statusResulTemp);
+        }
+         f1();
      },
 
      generateObjs:()=>{
         mdLinkHelpers.foundAndCleanedArr.forEach((url)=>{
+            console.log('these are the urls',url);
             let finalObjs = [];
             let linkObjLit = {};
             linkObjLit.href = url;
+            linkObjLit.status = mdLinkHelpers.checkStatus(linkObjLit.href);
             linkObjLit.text = 'still needed';
             linkObjLit.dir = mdLinkHelpers.targetDirectory;
             finalObjs.push(linkObjLit);
@@ -125,27 +153,17 @@ const mdLinkHelpers = {
         console.log(mdLinkHelpers.finalResult);
      },
 
-     findAsocText:()=>{
-         let finalArr = mdLinkHelpers.foundAndCleanedArr;
-         for(let i=0; i<finalArr.length; i++){
-             console.log('entra al for');
-             console.log(finalArr[i]);
-             for(let f=0; f<finalArr[i].length; f++){
-                console.log(finalArr[i][f]);
-                if(finalArr[i][f]==='h'){
-                    if(finalArr[i][f+1] === 't'){
-                        console.log('found');
-                        //
-                    }
-                }
-             }
-         }
-         
+     showStats : ()=>{
+         //muestra la longitud del array de urls
+         let urlsFoundCount = mdLinkHelpers.foundAndCleanedArr.length;
+         console.log(`There are ${urlsFoundCount} urls in the file or folder`);
      }
+
+
 
     
 };
 
 // mdLinkHelpers.findThePath('./sandBoxFolderRecycled');
-// mdLinkHelpers.isFolderOrFile('./sandBoxFolderRecycled');
+mdLinkHelpers.isFolderOrFile('./sandBoxFolderRecycled/recycledCodeFolder');
 module.exports = mdLinkHelpers;
